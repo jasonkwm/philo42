@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"unistd.h": "c",
+		"__threading_support": "c",
+		"_pthread_types.h": "c",
+		"__mutex_base": "c"
+	}
+}
