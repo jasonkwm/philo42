@@ -4,14 +4,12 @@ BONUS := bonus
 SRCS_DIR := ./src
 OBJS_DIR := ./obj
 
-SRCS := main.c functions.c
+SRCS := main.c init.c functions.c ft_atoi.c
 OBJS := ${SRCS:%.c=${OBJS_DIR}/%.o}
 
 CC := gcc -Wall -Werror -Wextra
 
-FLAGS := #-lpthread
-
-LIB := -lft -L ./libft
+FLAGS := -fsanitize=address -g #-lpthread
 
 RED := \033[0;31m
 GREEN := \033[0;32m
@@ -28,8 +26,7 @@ all : ${NAME}
 # "$<" is to match prerequisites
 # "$@" is to match target
 ${NAME} : ${OBJS}
-	make -C ./libft
-	${CC} ${FLAGS} -I includes -I libft ${OBJS} ${LIB} -o $@
+	${CC} ${FLAGS} -I includes ${OBJS} -o $@
 	@echo "${GREEN}Philo Compiled Successful."
 
 # "mkdir -p" creates dir if necessary, if dir exist, no error specified
@@ -37,16 +34,14 @@ ${NAME} : ${OBJS}
 # "gcc -o 'file' " use as a naming feature / place the output result to 'file'
 ${OBJS_DIR}/%.o : ${SRCS_DIR}/%.c
 	@mkdir -p ${OBJS_DIR}
-	@${CC} ${FLAGS} -I includes -I libft -c $< -o $@
+	@${CC} ${FLAGS} -I includes -c $< -o $@
 
 # "echo -e" to allow backslash escapes \ 
 clean :
 	@rm -rf ${OBJS_DIR}
-	@make clean -C ./libft
-	@echo "${RED}Cleaned.${NC}"
+	@echo "${YELLOW}Cleaned.${NC}"
 
 fclean : clean
-	@make fclean -C ./libft
 	@rm -rf ${NAME}
 	@echo "${RED}Full Cleaned.${NC}"
 
