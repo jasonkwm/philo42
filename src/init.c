@@ -40,10 +40,14 @@ void	ft_init_base(char **av, t_base *base)
 	base->sleep = (useconds_t)(ft_atoi(av[4]) * 1000);
 	if (av[5])
 		base->must_eat = ft_atoi(av[5]);
-	i = -1;
 	base->forks = malloc(sizeof(int) * base->nop);
+	base->states = malloc(sizeof(int) * base->nop);
+	i = -1;
 	while (++i < base->nop)
-		(base->forks)[i] = 1;
+	{
+		(base->forks)[i] = 0;
+		(base->states)[i] = 0;
+	}
 }
 
 void	ft_init_philos(t_philo **philos, t_base *base)
@@ -55,7 +59,6 @@ void	ft_init_philos(t_philo **philos, t_base *base)
 	while (++i < base->nop)
 	{
 		(*philos)[i].name = i;
-		(*philos)[i].state = thinking;
 		(*philos)[i].left = i;
 		(*philos)[i].base = base;
 		if (i == base->nop - 1)

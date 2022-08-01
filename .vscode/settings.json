@@ -3,6 +3,9 @@
 		"unistd.h": "c",
 		"__threading_support": "c",
 		"_pthread_types.h": "c",
-		"__mutex_base": "c"
+		"__mutex_base": "c",
+		"locale": "c",
+		"string": "c",
+		"typeinfo": "c"
 	}
 }
