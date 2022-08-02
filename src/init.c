@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/07/28 11:01:01 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/01 17:30:40 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,15 @@ void	ft_init_base(char **av, t_base *base)
 		base->must_eat = ft_atoi(av[5]);
 	base->forks = malloc(sizeof(int) * base->nop);
 	base->states = malloc(sizeof(int) * base->nop);
+	base->locks = malloc(sizeof(pthread_mutex_t) * base->nop);
 	i = -1;
 	while (++i < base->nop)
 	{
 		(base->forks)[i] = 0;
 		(base->states)[i] = 0;
+		pthread_mutex_init(&(base->locks[i]), NULL);
 	}
+	pthread_mutex_init(&(base->big_lock), NULL);
 }
 
 void	ft_init_philos(t_philo **philos, t_base *base)
@@ -61,9 +64,6 @@ void	ft_init_philos(t_philo **philos, t_base *base)
 		(*philos)[i].name = i;
 		(*philos)[i].left = i;
 		(*philos)[i].base = base;
-		if (i == base->nop - 1)
-			(*philos)[i].right = 0;
-		else
-			(*philos)[i].right = i + 1;
+		(*philos)[i].right = ((i + 1) % (base->nop));
 	}
 }

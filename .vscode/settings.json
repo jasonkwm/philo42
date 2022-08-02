@@ -6,6 +6,7 @@
 		"__mutex_base": "c",
 		"locale": "c",
 		"string": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"philo.h": "c"
 	}
 }

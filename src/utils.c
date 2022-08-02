@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 09:51:16 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/01 09:55:00 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/01 16:39:54 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ time_t	get_time()
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
