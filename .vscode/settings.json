@@ -7,6 +7,7 @@
 		"locale": "c",
 		"string": "c",
 		"typeinfo": "c",
-		"philo.h": "c"
+		"philo.h": "c",
+		"ios": "c"
 	}
 }

@@ -6,11 +6,14 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 10:42:15 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/02 10:42:29 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/02 13:49:09 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_uneating(t_philo *philo);
+void	ft_try_eat(t_philo *philo, int phil);
 
 void	ft_try_eat(t_philo *philo, int phnum)
 {

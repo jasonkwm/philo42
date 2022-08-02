@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Tue Aug  2 09:40:08 2022
+# Make data base, printed on Tue Aug  2 19:42:48 2022
 
 # Variables
 
@@ -51,7 +50,7 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 17)
 PURPLE := \033[0;35m
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.FTkImhszel/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.8yMTIitQNC/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -121,7 +120,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.8012
+XPC_SERVICE_NAME = com.microsoft.VSCode.8080
 # makefile (from `Makefile', line 5)
 OBJS_DIR := ./obj
 # automatic
@@ -153,8 +152,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
- 
-VSCODE_PID = 74200
+VSCODE_PID = 85983
 # variable set hash-table stats:
 # Load=71/1024=7%, Rehash=0, Collisions=4/102=4%
 
@@ -165,10 +163,10 @@ VSCODE_PID = 74200
 # Directories
 
 # . (device 16777228, inode 2520212): 10 files, no impossibilities.
-# ./src (device 16777228, inode 2560750): 7 files, no impossibilities so far.
-# src (device 16777228, inode 2560750): 7 files, no impossibilities so far.
+# ./src (device 16777228, inode 2560750): 8 files, no impossibilities so far.
+# src (device 16777228, inode 2560750): 8 files, no impossibilities so far.
 
-# 24 files, no impossibilities in 3 directories.
+# 26 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -194,7 +192,7 @@ all: philo
 
 philo: obj/main.o obj/init.o obj/functions.o obj/ft_atoi.o obj/utils.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-01 17:50:57
+#  Last modified 2022-08-02 15:54:50
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -221,7 +219,7 @@ src/functions.c:
 obj/main.o: src/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `main'
-#  Last modified 2022-08-01 17:50:57
+#  Last modified 2022-08-02 15:54:50
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -262,7 +260,7 @@ Makefile:
 # Not a target:
 src/utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-01 16:39:54
+#  Last modified 2022-08-02 13:48:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -281,7 +279,7 @@ fclean: clean
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-01 17:50:54
+#  Last modified 2022-08-02 15:54:37
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -311,6 +309,7 @@ re: fclean all
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
+ 
 #  File does not exist.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 41):
@@ -321,7 +320,7 @@ clean:
 obj/init.o: src/init.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `init'
-#  Last modified 2022-08-01 17:36:52
+#  Last modified 2022-08-02 15:48:53
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -334,7 +333,7 @@ obj/init.o: src/init.c
 obj/utils.o: src/utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `utils'
-#  Last modified 2022-08-01 16:46:58
+#  Last modified 2022-08-02 14:05:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -360,7 +359,7 @@ obj/functions.o: src/functions.c
 # Not a target:
 src/init.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-01 17:30:40
+#  Last modified 2022-08-02 15:47:54
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -379,6 +378,6 @@ src/init.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug  2 09:40:08 2022
+# Finished Make data base on Tue Aug  2 19:42:48 2022
 
  

@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/01 17:30:40 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/02 19:50:33 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	ft_init_base(char **av, t_base *base)
 	int	i;
 
 	base->nop = ft_atoi(av[1]);
-	base->think = (useconds_t)(ft_atoi(av[2]) * 1000);
-	base->eat = (useconds_t)(ft_atoi(av[3]) * 1000);
-	base->sleep = (useconds_t)(ft_atoi(av[4]) * 1000);
+	base->think = (useconds_t)(ft_atoi(av[2]));
+	base->eat = (useconds_t)(ft_atoi(av[3]));
+	base->sleep = (useconds_t)(ft_atoi(av[4]));
 	if (av[5])
 		base->must_eat = ft_atoi(av[5]);
 	base->forks = malloc(sizeof(int) * base->nop);
@@ -63,7 +63,7 @@ void	ft_init_philos(t_philo **philos, t_base *base)
 	{
 		(*philos)[i].name = i;
 		(*philos)[i].left = i;
-		(*philos)[i].base = base;
 		(*philos)[i].right = ((i + 1) % (base->nop));
+		(*philos)[i].base = base;
 	}
 }

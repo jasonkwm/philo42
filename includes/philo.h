@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/01 17:30:37 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/02 14:40:56 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_philo
 	int		name;
 	int		left;
 	int		right;
+	int		shinda;
 	t_base	*base;
 }	t_philo;
 
@@ -62,4 +63,5 @@ int		ft_atoi(const char *str);
 
 // utils.c
 time_t	get_time();
+void	change_state(t_philo *philo,  int phnum, int state);
 #endif
