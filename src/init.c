@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/02 19:50:33 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/04 16:22:27 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ void	ft_init_base(char **av, t_base *base)
 	int	i;
 
 	base->nop = ft_atoi(av[1]);
-	base->think = (useconds_t)(ft_atoi(av[2]));
-	base->eat = (useconds_t)(ft_atoi(av[3]));
-	base->sleep = (useconds_t)(ft_atoi(av[4]));
+	base->to_die = (useconds_t)(ft_atoi(av[2]));
+	base->to_eat = (useconds_t)(ft_atoi(av[3]));
+	base->to_sleep = (useconds_t)(ft_atoi(av[4]));
+	base->shinda = 0;
 	if (av[5])
 		base->must_eat = ft_atoi(av[5]);
 	base->forks = malloc(sizeof(int) * base->nop);
-	base->states = malloc(sizeof(int) * base->nop);
 	base->locks = malloc(sizeof(pthread_mutex_t) * base->nop);
 	i = -1;
 	while (++i < base->nop)
 	{
 		(base->forks)[i] = 0;
-		(base->states)[i] = 0;
 		pthread_mutex_init(&(base->locks[i]), NULL);
+		if (i < 10)
+			pthread_mutex_init(&(base->temp_locks[i]), NULL);
 	}
-	pthread_mutex_init(&(base->big_lock), NULL);
 }
 
 void	ft_init_philos(t_philo **philos, t_base *base)
