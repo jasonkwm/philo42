@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 09:51:16 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/04 18:09:14 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 14:45:45 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	usleep_ext(useconds_t time)
 	i = 0;
 	while (i < time)
 	{
-		usleep(20);
-		i += 20;
+		usleep(50);
+		i += 50;
 	}
 }
 
@@ -39,5 +39,7 @@ void	usleep_ext(useconds_t time)
 // "has taken a fork", "is eating", "is sleeping", "is thinking", "died"
 void	printf_ext(t_philo *philo, char *msg, char *color)
 {
+	pthread_mutex_lock(&(philo->base->print_lock));
 	printf("%s%ld %i %s%s\n", color, get_time(), philo->name, msg, NC);
+	pthread_mutex_unlock(&(philo->base->print_lock));
 }

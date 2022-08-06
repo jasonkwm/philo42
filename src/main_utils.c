@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:25:11 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/04 18:36:24 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/06 11:04:30 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,24 @@ void    check_fork(t_philo *philo)
         fork = philo->right;
     else
         fork = philo->left;
-    while (philo->base->forks[fork] == 1)
+    pthread_mutex_lock(&(philo->base->base_lock));
+	philo->to_check = philo->base->forks[fork];
+	pthread_mutex_unlock(&(philo->base->base_lock));
+    while (philo->to_check == 1)
     {
         usleep_ext(10);
         cur = get_time();
-        if (cur >= philo->death_timer)
+        pthread_mutex_lock(&(philo->base->base_lock));
+        if (cur > philo->death_timer)
         {
-            pthread_mutex_lock(&(philo->base->temp_locks[0]));
             philo->base->shinda = 1;
-            pthread_mutex_unlock(&(philo->base->temp_locks[0]));
-            printf_ext(philo, "is dead", RED);
+		    philo->to_check = philo->base->forks[fork];
+			pthread_mutex_unlock(&(philo->base->base_lock));
+            // printf_ext(philo, "is dead", RED);
             break;
         }
+		philo->to_check = philo->base->forks[fork];
+		pthread_mutex_unlock(&(philo->base->base_lock));
     }
 }
 
@@ -48,14 +54,14 @@ void    check_death(t_philo *philo, int temp)
     comp = get_time() + temp;
     while (cur < comp)
     {
+        pthread_mutex_lock(&(philo->base->base_lock));
         if (philo->base->shinda == 1)
         {
-            pthread_mutex_lock(&(philo->base->temp_locks[0]));
-            philo->base->shinda = 1;
-            pthread_mutex_unlock(&(philo->base->temp_locks[0]));
+        	pthread_mutex_unlock(&(philo->base->base_lock));
             printf_ext(philo, "is dead", RED);
             break;
         }
+        pthread_mutex_unlock(&(philo->base->base_lock));
         usleep_ext(10);
         cur = get_time();
     }

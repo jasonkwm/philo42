@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/04 18:32:50 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 14:30:33 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct s_base
 	int				shinda;
 	int				*forks;
 	pthread_mutex_t	*locks;
-	pthread_mutex_t	temp_locks[10];
+	pthread_mutex_t	base_lock;
+	pthread_mutex_t	print_lock;
 }	t_base;
 
 typedef struct s_philo
@@ -52,6 +53,7 @@ typedef struct s_philo
 	enum e_states	state;
 	useconds_t		death_timer;
 	int				eaten;
+	int				to_check;
 	t_base			*base;
 }	t_philo;
 

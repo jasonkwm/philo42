@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/04 16:22:27 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 14:33:50 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ft_init_base(char **av, t_base *base)
 	{
 		(base->forks)[i] = 0;
 		pthread_mutex_init(&(base->locks[i]), NULL);
-		if (i < 10)
-			pthread_mutex_init(&(base->temp_locks[i]), NULL);
 	}
+	pthread_mutex_init(&(base->base_lock), NULL);
+	pthread_mutex_init(&(base->print_lock), NULL);
 }
 
 void	ft_init_philos(t_philo **philos, t_base *base)

@@ -8,6 +8,7 @@
 		"string": "c",
 		"typeinfo": "c",
 		"philo.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"time.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:21 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/04 18:38:26 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/05 15:07:18 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,40 +70,54 @@ int	ft_eating(t_philo *philo)
 	{
 		pthread_mutex_lock(&(philo->base->locks[philo->right]));
 		// need to new mutex to modify forks
+		pthread_mutex_lock(&(philo->base->base_lock));
 		philo->base->forks[philo->right] = 1;
+		pthread_mutex_unlock(&(philo->base->base_lock));
 		printf_ext(philo, "has taken a fork", GREEN);
 	}
 	else
 	{
 		pthread_mutex_lock(&(philo->base->locks[philo->left]));
 		// need to new mutex to modify forks
+		pthread_mutex_lock(&(philo->base->base_lock));
 		philo->base->forks[philo->left] = 1;
+		pthread_mutex_unlock(&(philo->base->base_lock));
 		printf_ext(philo, "has taken a fork", GREEN);
 	}
 
 	if (philo->name % 2 == 1)
 	{
 		pthread_mutex_lock(&(philo->base->locks[philo->left]));
+		pthread_mutex_lock(&(philo->base->base_lock));
 		philo->base->forks[philo->left] = 1;
+		pthread_mutex_unlock(&(philo->base->base_lock));
 		printf_ext(philo, "has taken a fork", GREEN);
 		printf_ext(philo, "is eating", GREEN);
 		philo->death_timer = get_time() + philo->base->to_die;
 		check_death(philo, philo->death_timer);
+		pthread_mutex_lock(&(philo->base->base_lock));
 		philo->base->forks[philo->left] = 0;
 		philo->base->forks[philo->right] = 0;
+		pthread_mutex_unlock(&(philo->base->base_lock));
+		philo->eaten += 1;
 		pthread_mutex_unlock(&(philo->base->locks[philo->left]));
 		pthread_mutex_unlock(&(philo->base->locks[philo->right]));
 	}
 	else
 	{
 		pthread_mutex_lock(&(philo->base->locks[philo->right]));
+		pthread_mutex_lock(&(philo->base->base_lock));
 		philo->base->forks[philo->right] = 1;
+		pthread_mutex_unlock(&(philo->base->base_lock));
 		printf_ext(philo, "has taken a fork", GREEN);
 		printf_ext(philo, "is eating", GREEN);
 		philo->death_timer = get_time() + philo->base->to_die;
 		check_death(philo, philo->death_timer);
+		pthread_mutex_lock(&(philo->base->base_lock));
 		philo->base->forks[philo->left] = 0;
 		philo->base->forks[philo->right] = 0;
+		pthread_mutex_unlock(&(philo->base->base_lock));
+		philo->eaten += 1;
 		pthread_mutex_unlock(&(philo->base->locks[philo->right]));
 		pthread_mutex_unlock(&(philo->base->locks[philo->left]));
 	}
