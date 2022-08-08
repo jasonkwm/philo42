@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:33:50 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/07 14:44:20 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ void	ft_init(char **av, t_philo **philos, t_base *base)
 	// ft_check_input(ac, av);
 	ft_init_base(av, base);
 	ft_init_philos(philos, base);
+	base->philos = *philos;
 }
-
-// void	ft_check_input(int ac, char **av)
-// {
-// 	//do something
-// }
 
 // av takes at least 4 args number 5 is optional
 // (nop) number_of_philosophers
@@ -39,15 +35,16 @@ void	ft_init_base(char **av, t_base *base)
 	base->to_eat = (useconds_t)(ft_atoi(av[3]));
 	base->to_sleep = (useconds_t)(ft_atoi(av[4]));
 	base->shinda = 0;
+	base->round = 0;
 	if (av[5])
 		base->must_eat = ft_atoi(av[5]);
-	base->forks = malloc(sizeof(int) * base->nop);
-	base->locks = malloc(sizeof(pthread_mutex_t) * base->nop);
+	base->forks = malloc(sizeof(pthread_mutex_t) * base->nop);
+	base->states = malloc(sizeof(int) * base->nop);
 	i = -1;
 	while (++i < base->nop)
 	{
-		(base->forks)[i] = 0;
-		pthread_mutex_init(&(base->locks[i]), NULL);
+		base->states[i] = 0;
+		pthread_mutex_init(&(base->forks[i]), NULL);
 	}
 	pthread_mutex_init(&(base->base_lock), NULL);
 	pthread_mutex_init(&(base->print_lock), NULL);
@@ -65,5 +62,6 @@ void	ft_init_philos(t_philo **philos, t_base *base)
 		(*philos)[i].left = i;
 		(*philos)[i].right = ((i + 1) % (base->nop));
 		(*philos)[i].base = base;
+		pthread_mutex_init(&((*philos)->philo_lock), NULL);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/05 14:30:33 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/08 13:54:29 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define NC "\033[0m"
 
 enum e_states{thinking, eating, sleeping};
+struct s_philo;
 
 typedef struct s_base
 {
@@ -38,8 +39,10 @@ typedef struct s_base
 	time_t			to_sleep;
 	int				must_eat;
 	int				shinda;
-	int				*forks;
-	pthread_mutex_t	*locks;
+	int				*states;
+	int				round;
+	struct s_philo	*philos;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	base_lock;
 	pthread_mutex_t	print_lock;
 }	t_base;
@@ -50,10 +53,10 @@ typedef struct s_philo
 	int				name;
 	int				left;
 	int				right;
-	enum e_states	state;
-	useconds_t		death_timer;
+	time_t			death_timer;
 	int				eaten;
 	int				to_check;
+	pthread_mutex_t	philo_lock;
 	t_base			*base;
 }	t_philo;
 
@@ -67,11 +70,10 @@ int		ft_atoi(const char *str);
 
 // utils.c
 time_t	get_time();
-void	usleep_ext(useconds_t time);
+void	usleep_ext(t_philo *philo, time_t time);
 void	printf_ext(t_philo *philo, char *msg, char *color);
 
 // main_utils.c
-void    check_fork(t_philo *philo);
 void    check_death(t_philo *philo, int temp);
 
 #endif
