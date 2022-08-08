@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/08 13:54:29 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/08 17:50:15 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@
 # define CYAN "\033[0;36m"
 # define NC "\033[0m"
 
-enum e_states{thinking, eating, sleeping};
+# define THINK 0
+# define EAT 1
+# define SLEEP 2
+# define DIE 3
+
 struct s_philo;
 
 typedef struct s_base
@@ -55,7 +59,7 @@ typedef struct s_philo
 	int				right;
 	time_t			death_timer;
 	int				eaten;
-	int				to_check;
+	int				status;
 	pthread_mutex_t	philo_lock;
 	t_base			*base;
 }	t_philo;
@@ -74,6 +78,8 @@ void	usleep_ext(t_philo *philo, time_t time);
 void	printf_ext(t_philo *philo, char *msg, char *color);
 
 // main_utils.c
-void    check_death(t_philo *philo, int temp);
+int		check_death(t_philo *philo);
+void	change_states(t_philo *philo, int state);
+void    check_death_tmp(t_philo *philo, int temp);
 
 #endif

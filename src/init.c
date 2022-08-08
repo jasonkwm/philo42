@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/07 14:44:20 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/08 16:07:51 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_init_philos(t_philo **philos, t_base *base)
 		(*philos)[i].left = i;
 		(*philos)[i].right = ((i + 1) % (base->nop));
 		(*philos)[i].base = base;
+		(*philos)[i].status = 0;
 		pthread_mutex_init(&((*philos)->philo_lock), NULL);
 	}
 }

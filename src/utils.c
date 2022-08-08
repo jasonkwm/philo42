@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 09:51:16 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/08 15:30:52 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/08 20:00:06 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,24 @@ void	usleep_ext(t_philo *philo, time_t time)
 {
 	time_t	cur;
 	time_t	cmp;
-
 	
 	(void)philo;
 	cmp = get_time() + time;
-	while (philo->base->shinda != 1)
+	
+	while (1)
 	{
 		cur = get_time();
-		if (cmp - cur <= 0)
+		if (philo->death_timer <= cur)
+		{
+			printf_ext(philo, "is dead", RED);
+			change_states(philo, DIE);
+			break ;
+		}
+		if (cmp - cur <= 0 || check_death(philo))
 			break ;
 		usleep(50);
 	}
+	
 }
 
 // Output order should look like "time" "name" "message" 
