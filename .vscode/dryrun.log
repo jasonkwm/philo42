@@ -2,7 +2,6 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/jakoh/Desktop/philo'
 mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/main.c -o obj/main.o
- 
 mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/init.c -o obj/init.o
 mkdir -p ./obj

@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Thu Aug 11 13:04:25 2022
+# Make data base, printed on Thu Aug 11 18:59:28 2022
 
 # Variables
 
@@ -34,7 +33,6 @@ _ = /usr/bin/make
 BLUE := \033[0;34m
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
- 
 # makefile (from `Makefile', line 2)
 BONUS := bonus
 # makefile (from `Makefile', line 8)
@@ -52,7 +50,7 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 17)
 PURPLE := \033[0;35m
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wVUryajUcY/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.oPPTljZ9GG/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -122,7 +120,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.8340
+XPC_SERVICE_NAME = com.microsoft.VSCode.8420
 # makefile (from `Makefile', line 5)
 OBJS_DIR := ./obj
 # automatic
@@ -154,9 +152,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2103
+VSCODE_PID = 49277
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=4/107=4%
+# Load=71/1024=7%, Rehash=0, Collisions=4/102=4%
 
 # Pattern-specific Variable Values
 
@@ -188,17 +186,17 @@ all: philo
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 philo: obj/main.o obj/init.o obj/ft_atoi.o obj/utils.o obj/main_utils.o obj/fork.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-11 09:34:24
+#  Last modified 2022-08-11 17:05:32
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 29):
 	${CC} ${FLAGS} -I includes ${OBJS} -o $@
 	@echo "${GREEN}Philo Compiled Successful."
@@ -209,10 +207,29 @@ philo: obj/main.o obj/init.o obj/ft_atoi.o obj/utils.o obj/main_utils.o obj/fork
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+src/main_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-11 16:04:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+src/fork.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-11 16:12:28
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 obj/main.o: src/main.c
 #  Implicit rule search has been done.
+ 
 #  Implicit/static pattern stem: `main'
-#  Last modified 2022-08-11 09:33:06
+#  Last modified 2022-08-11 17:05:32
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -231,7 +248,7 @@ obj/main.o: src/main.c
 obj/ft_atoi.o: src/ft_atoi.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `ft_atoi'
-#  Last modified 2022-08-11 09:18:38
+#  Last modified 2022-08-11 15:00:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -253,7 +270,7 @@ Makefile:
 # Not a target:
 src/utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-11 12:58:02
+#  Last modified 2022-08-11 16:08:09
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -272,7 +289,7 @@ fclean: clean
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-11 09:33:04
+#  Last modified 2022-08-11 17:05:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -312,7 +329,7 @@ clean:
 obj/init.o: src/init.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `init'
-#  Last modified 2022-08-11 09:18:38
+#  Last modified 2022-08-11 16:01:53
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -325,56 +342,53 @@ obj/init.o: src/init.c
 obj/utils.o: src/utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `utils'
-#  Last modified 2022-08-11 09:32:27
+#  Last modified 2022-08-11 16:08:34
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/utils.o
-# automatic
-# % := 
-# automatic
-# * := utils
-# automatic
-# + := src/utils.c
-# automatic
-# | := 
-# automatic
-# < := src/utils.c
-# automatic
-# ^ := src/utils.c
-# automatic
-# ? := src/utils.c
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
- 
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 36):
+	@mkdir -p ${OBJS_DIR}
+	@${CC} ${FLAGS} -I includes -c $< -o $@
+	
+
+obj/main_utils.o: src/main_utils.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `main_utils'
+#  Last modified 2022-08-11 16:05:48
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 36):
+	@mkdir -p ${OBJS_DIR}
+	@${CC} ${FLAGS} -I includes -c $< -o $@
+	
+
+obj/fork.o: src/fork.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `fork'
+#  Last modified 2022-08-11 16:12:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 36):
 	@mkdir -p ${OBJS_DIR}
 	@${CC} ${FLAGS} -I includes -c $< -o $@
 	
 
 # Not a target:
-obj/main_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj/fork.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 src/init.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-11 09:17:48
+#  Last modified 2022-08-11 15:56:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=19/1024=2%, Rehash=0, Collisions=5/58=9%
+# Load=21/1024=2%, Rehash=0, Collisions=5/66=8%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -386,6 +400,6 @@ src/init.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Aug 11 13:04:25 2022
+# Finished Make data base on Thu Aug 11 18:59:28 2022
 
  

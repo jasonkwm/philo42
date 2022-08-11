@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 15:56:19 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 19:08:09 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_init(char **av, t_philo **philos, t_base *base)
 {
-	// ft_check_input(ac, av);
 	ft_init_base(av, base);
 	ft_init_philos(philos, base);
 	base->philos = *philos;

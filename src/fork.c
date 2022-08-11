@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:09:49 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 16:12:28 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 19:02:31 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_fork(t_philo *philo, int fork)
 		cur = get_time();
 		if (check_death(philo))
 			return (3);
-        if (philo->death_timer <= cur)
+		if (philo->death_timer <= cur)
 		{
 			change_states(philo, DIE);
 			print_death(philo, "died", RED);
@@ -55,4 +55,19 @@ void	unlock_forks(t_philo *philo)
 	philo->base->fork_status[philo->left] = 0;
 	philo->base->fork_status[philo->right] = 0;
 	pthread_mutex_unlock(&(philo->base->fork_lock));
+}
+
+int	fork_assist(t_philo *philo, int fork_1, int fork_2)
+{
+	if (check_fork(philo, fork_1) != 1)
+	{
+		unlock_forks(philo);
+		return (1);
+	}
+	if (check_fork(philo, fork_2) != 1)
+	{
+		unlock_forks(philo);
+		return (1);
+	}
+	return (0);
 }

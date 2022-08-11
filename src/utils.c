@@ -6,18 +6,18 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 09:51:16 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 16:08:09 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 19:06:40 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-time_t	get_time()
+time_t	get_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (time_t)((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	return ((time_t)((tv.tv_sec * 1000) + (tv.tv_usec / 1000)));
 }
 
 // help increase accuracy of usleep function
@@ -56,10 +56,6 @@ void	printf_ext(t_philo *philo, char *msg, char *color)
 		printf("%s%ld %i %s%s\n", color, get_time(), philo->name, msg, NC);
 		pthread_mutex_unlock(&(philo->base->print_lock));
 	}
-	// if (check_death(philo) == 0)
-	// 	pthread_mutex_lock(&(philo->base->print_lock));
-	// 		printf("%s%ld %i %s%s\n", color, get_time(), philo->name, msg, NC);
-	// 	pthread_mutex_unlock(&(philo->base->print_lock));
 }
 
 void	print_death(t_philo *philo, char *msg, char *color)

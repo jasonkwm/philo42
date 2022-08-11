@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 16:27:21 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 19:00:20 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int		change_states(t_philo *philo, int state);
 int		count_death(t_philo *philo);
 
 // fork.c
-int		check_fork(t_philo *philo, int fork);
-void	pick_fork(t_philo *philo, int fork);
 void	unlock_forks(t_philo *philo);
-
+void	pick_fork(t_philo *philo, int fork);
+int		check_fork(t_philo *philo, int fork);
+int		fork_assist(t_philo *philo, int fork_1, int fork_2);
 #endif
