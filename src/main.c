@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:21 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 16:33:09 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 17:05:30 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		thinking(t_philo *philo);
 int		eating(t_philo *philo);
 int		sleeping(t_philo *philo);
 
+int		fork_assist(t_philo *philo, int fork_1, int fork_2);
 // 0 = thinking, 1 = eating, 2 = sleeping
 int main(int ac, char **av)
 {
@@ -66,35 +67,27 @@ int	thinking(t_philo *philo)
 		philo->death_timer = get_time() + philo->base->to_die;
 	change_states(philo, THINK);
 	printf_ext(philo, "is thinking", PURPLE);
-	// WAIT FOR FORKS TO BE AVAILABLE
 	if (philo->name % 2 == 0)
-	{
-		if (check_fork(philo, philo->right) != 1)
-		{
-			unlock_forks(philo);
-			return (1);
-		}
-		if (check_fork(philo, philo->left) != 1)
-		{
-			unlock_forks(philo);
-			return (1);
-		}
-	}
+		fork_assist(philo, philo->right, philo->left);
 	else
-	{
-		if (check_fork(philo, philo->left) != 1)
-		{
-			unlock_forks(philo);
-			return (1);
-		}
-		if (check_fork(philo, philo->right) != 1)
-		{
-			unlock_forks(philo);
-			return (1);
-		}
-	}
+		fork_assist(philo, philo->left, philo->right);
 	if (check_death(philo))
 		return (1);
+	return (0);
+}
+
+int	fork_assist(t_philo *philo, int fork_1, int fork_2)
+{
+	if (check_fork(philo, fork_1) != 1)
+		{
+			unlock_forks(philo);
+			return (1);
+		}
+		if (check_fork(philo, fork_2) != 1)
+		{
+			unlock_forks(philo);
+			return (1);
+		}
 	return (0);
 }
 
