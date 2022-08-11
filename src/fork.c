@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:09:49 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/10 18:40:48 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:12:28 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,22 @@ int	check_fork(t_philo *philo, int fork)
 	{
 		cur = get_time();
 		if (check_death(philo))
-            return (3);
+			return (3);
         if (philo->death_timer <= cur)
 		{
 			change_states(philo, DIE);
 			print_death(philo, "died", RED);
 			return (2);
 		}
-		pthread_mutex_lock(&(philo->base->state_lock));
-		if (philo->base->states[fork] != EAT)
-			return (1 | pthread_mutex_unlock(&(philo->base->state_lock)));
-		pthread_mutex_unlock(&(philo->base->state_lock));
+		pthread_mutex_lock(&(philo->base->fork_lock));
+		if (philo->base->fork_status[fork] == 0)
+		{
+			philo->base->fork_status[fork] = 1;
+			pthread_mutex_unlock(&(philo->base->fork_lock));
+			pick_fork(philo, fork);
+			return (1);
+		}
+		pthread_mutex_unlock(&(philo->base->fork_lock));
 		usleep(50);
 	}
 	return (0);
@@ -46,4 +51,8 @@ void	unlock_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(&(philo->base->forks[philo->left]));
 	pthread_mutex_unlock(&(philo->base->forks[philo->right]));
+	pthread_mutex_lock(&(philo->base->fork_lock));
+	philo->base->fork_status[philo->left] = 0;
+	philo->base->fork_status[philo->right] = 0;
+	pthread_mutex_unlock(&(philo->base->fork_lock));
 }

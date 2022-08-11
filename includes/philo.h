@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/10 18:25:00 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:27:21 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ typedef struct s_base
 	time_t			to_sleep;
 	int				must_eat;
 	int				*states;
+	int				*fork_status;
 	struct s_philo	*philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	fork_lock;
 	pthread_mutex_t	state_lock;
-	pthread_mutex_t	base_lock;
 	pthread_mutex_t	print_lock;
 }	t_base;
 

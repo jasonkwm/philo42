@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/10 13:52:24 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 15:56:19 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@ void	ft_init_base(char **av, t_base *base)
 	if (av[5])
 		base->must_eat = ft_atoi(av[5]);
 	base->forks = malloc(sizeof(pthread_mutex_t) * base->nop);
+	base->fork_status = malloc(sizeof(int) * base->nop);
 	base->states = malloc(sizeof(int) * base->nop);
 	i = -1;
 	while (++i < base->nop)
 	{
 		base->states[i] = 0;
+		base->fork_status[i] = 0;
 		pthread_mutex_init(&(base->forks[i]), NULL);
 	}
+	pthread_mutex_init(&(base->fork_lock), NULL);
 	pthread_mutex_init(&(base->state_lock), NULL);
-	pthread_mutex_init(&(base->base_lock), NULL);
 	pthread_mutex_init(&(base->print_lock), NULL);
 }
 

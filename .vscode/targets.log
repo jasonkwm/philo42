@@ -6,8 +6,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Thu Aug 11 08:53:32 2022
+# Make data base, printed on Thu Aug 11 13:04:25 2022
 
 # Variables
 
@@ -33,6 +34,7 @@ _ = /usr/bin/make
 BLUE := \033[0;34m
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
+ 
 # makefile (from `Makefile', line 2)
 BONUS := bonus
 # makefile (from `Makefile', line 8)
@@ -50,7 +52,7 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 17)
 PURPLE := \033[0;35m
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.8uehGkB0rc/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wVUryajUcY/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -152,7 +154,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 43574
+VSCODE_PID = 2103
 # variable set hash-table stats:
 # Load=71/1024=7%, Rehash=0, Collisions=4/107=4%
 
@@ -192,7 +194,7 @@ all: philo
 
 philo: obj/main.o obj/init.o obj/ft_atoi.o obj/utils.o obj/main_utils.o obj/fork.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-10 18:42:10
+#  Last modified 2022-08-11 09:34:24
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -210,7 +212,7 @@ philo: obj/main.o obj/init.o obj/ft_atoi.o obj/utils.o obj/main_utils.o obj/fork
 obj/main.o: src/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `main'
-#  Last modified 2022-08-10 18:41:26
+#  Last modified 2022-08-11 09:33:06
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -229,7 +231,7 @@ obj/main.o: src/main.c
 obj/ft_atoi.o: src/ft_atoi.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `ft_atoi'
-#  Last modified 2022-08-10 13:27:58
+#  Last modified 2022-08-11 09:18:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -242,7 +244,7 @@ obj/ft_atoi.o: src/ft_atoi.c
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-10 18:10:18
+#  Last modified 2022-08-11 09:17:48
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -251,7 +253,7 @@ Makefile:
 # Not a target:
 src/utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-10 18:42:30
+#  Last modified 2022-08-11 12:58:02
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -270,7 +272,7 @@ fclean: clean
 # Not a target:
 src/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-10 18:41:25
+#  Last modified 2022-08-11 09:33:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -308,10 +310,9 @@ clean:
 	
 
 obj/init.o: src/init.c
- 
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `init'
-#  Last modified 2022-08-10 18:24:30
+#  Last modified 2022-08-11 09:18:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -324,7 +325,7 @@ obj/init.o: src/init.c
 obj/utils.o: src/utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `utils'
-#  Last modified 2022-08-10 18:42:09
+#  Last modified 2022-08-11 09:32:27
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -345,6 +346,7 @@ obj/utils.o: src/utils.c
 # ? := src/utils.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+ 
 #  commands to execute (from `Makefile', line 36):
 	@mkdir -p ${OBJS_DIR}
 	@${CC} ${FLAGS} -I includes -c $< -o $@
@@ -365,7 +367,7 @@ obj/fork.o:
 # Not a target:
 src/init.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-10 13:52:24
+#  Last modified 2022-08-11 09:17:48
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -384,6 +386,6 @@ src/init.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Aug 11 08:53:32 2022
+# Finished Make data base on Thu Aug 11 13:04:25 2022
 
  

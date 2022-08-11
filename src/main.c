@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:21 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/10 18:41:25 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:33:09 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ int main(int ac, char **av)
 	while (++i < base.nop)
 	{
 		pthread_join(philos[i].th, NULL);
-		if (i == 0)
-		{
-			pthread_mutex_destroy(&(base.base_lock));
-			pthread_mutex_destroy(&(base.print_lock));
-			pthread_mutex_destroy(&(base.state_lock));
-		}
 		pthread_mutex_destroy(&(base.forks[i]));
 	}
+	pthread_mutex_destroy(&(base.fork_lock));
+	pthread_mutex_destroy(&(base.print_lock));
+	pthread_mutex_destroy(&(base.state_lock));
 	printf("End.\n");
 }
 
@@ -68,19 +65,16 @@ int	thinking(t_philo *philo)
 	if (philo->death_timer == 0)
 		philo->death_timer = get_time() + philo->base->to_die;
 	change_states(philo, THINK);
+	printf_ext(philo, "is thinking", PURPLE);
 	// WAIT FOR FORKS TO BE AVAILABLE
 	if (philo->name % 2 == 0)
 	{
-		if (check_fork(philo, philo->right) == 1)
-			pick_fork(philo, philo->right);
-		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+		if (check_fork(philo, philo->right) != 1)
 		{
 			unlock_forks(philo);
 			return (1);
 		}
-		if (check_fork(philo, philo->left) == 1)
-			pick_fork(philo, philo->left);
-		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+		if (check_fork(philo, philo->left) != 1)
 		{
 			unlock_forks(philo);
 			return (1);
@@ -88,15 +82,19 @@ int	thinking(t_philo *philo)
 	}
 	else
 	{
-		if (check_fork(philo, philo->left) == 1)
-			pick_fork(philo, philo->left);
-		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+		if (check_fork(philo, philo->left) != 1)
+		{
+			unlock_forks(philo);
 			return (1);
-		if (check_fork(philo, philo->right) == 1)
-			pick_fork(philo, philo->right);
-		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+		}
+		if (check_fork(philo, philo->right) != 1)
+		{
+			unlock_forks(philo);
 			return (1);
+		}
 	}
+	if (check_death(philo))
+		return (1);
 	return (0);
 }
 
@@ -105,7 +103,7 @@ int	eating(t_philo *philo)
 	change_states(philo, EAT);
 	printf_ext(philo, "is eating", GREEN);
 	philo->death_timer = get_time() + philo->base->to_die;
-	if (usleep_ext(philo, philo->base->to_eat) == 2)
+	if (usleep_ext(philo, philo->base->to_eat) == 2 || check_death(philo))
 	{
 		unlock_forks(philo);
 		return (1);
@@ -119,7 +117,7 @@ int	sleeping(t_philo *philo)
 {
 	change_states(philo, SLEEP);
 	printf_ext(philo, "is sleeping", BLUE);
-	if (usleep_ext(philo, philo->base->to_sleep) == 2)
+	if (usleep_ext(philo, philo->base->to_sleep) == 2 || check_death(philo))
 		return (1);
 	return (0);
 }

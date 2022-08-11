@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:25:11 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/10 18:28:26 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:04:17 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,13 @@ int		check_death(t_philo *philo)
 // returns 1 for successful state change
 int		change_states(t_philo *philo, int state)
 {
-	int	i;
-
-	pthread_mutex_lock(&(philo->base->state_lock));
-	i = -1;
-	while (++i < philo->base->nop)
+	
+	if (count_death(philo) == 0)
 	{
-		if(philo->base->states[i] == DIE)
-        {
-            pthread_mutex_unlock(&(philo->base->state_lock));
-			return (0);
-        }
+		pthread_mutex_lock(&(philo->base->state_lock));
+		philo->base->states[philo->name] = state;
+		pthread_mutex_unlock(&(philo->base->state_lock));
 	}
-	philo->base->states[philo->name] = state;
-	pthread_mutex_unlock(&(philo->base->state_lock));
 	return (1);
 }
 
@@ -61,9 +54,9 @@ int		count_death(t_philo *philo)
 	int	i;
 	int	c;
 
-	pthread_mutex_lock(&(philo->base->state_lock));
 	c = 0;
 	i = -1;
+	pthread_mutex_lock(&(philo->base->state_lock));
 	while (++i < philo->base->nop)
 	{
 		if (philo->base->states[i] == DIE)
