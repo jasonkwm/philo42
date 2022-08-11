@@ -6,16 +6,17 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:21 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/08 17:43:09 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/10 18:41:25 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 void	*ft_create(void *arg);
-void	ft_thinking(t_philo *philo);
-void	ft_eating(t_philo *philo);
-void	ft_sleep(t_philo *philo);
+int		thinking(t_philo *philo);
+int		eating(t_philo *philo);
+int		sleeping(t_philo *philo);
+
 // 0 = thinking, 1 = eating, 2 = sleeping
 int main(int ac, char **av)
 {
@@ -33,6 +34,12 @@ int main(int ac, char **av)
 	while (++i < base.nop)
 	{
 		pthread_join(philos[i].th, NULL);
+		if (i == 0)
+		{
+			pthread_mutex_destroy(&(base.base_lock));
+			pthread_mutex_destroy(&(base.print_lock));
+			pthread_mutex_destroy(&(base.state_lock));
+		}
 		pthread_mutex_destroy(&(base.forks[i]));
 	}
 	printf("End.\n");
@@ -46,74 +53,73 @@ void	*ft_create(void *arg)
 	i = -1;
 	while (1)
 	{
-		ft_thinking(philo);
-		ft_eating(philo);
-		if (check_death(philo))
+		if (thinking(philo))
 			return (arg);
-		ft_sleep(philo);
-		if (check_death(philo))
+		if (eating(philo))
+			return (arg);
+		if (sleeping(philo))
 			return (arg);
 	}
 	return (arg);
 }
 
-void	ft_thinking(t_philo *philo)
+int	thinking(t_philo *philo)
 {
 	if (philo->death_timer == 0)
 		philo->death_timer = get_time() + philo->base->to_die;
 	change_states(philo, THINK);
-	printf_ext(philo, "is thinking", PURPLE);
-	// usleep_ext(philo, philo->base->to_die);
-}
-
-
-// if even philo take right fork first
-// if odd philo take left fork first
-void	ft_eating(t_philo *philo)
-{
-	// change_states(philo, THINK);
-	// printf_ext(philo, "is thinking", PURPLE);
+	// WAIT FOR FORKS TO BE AVAILABLE
 	if (philo->name % 2 == 0)
 	{
-		pthread_mutex_lock(&(philo->base->forks[philo->right]));
-		printf_ext(philo, "has taken a fork", YELLOW);
-		
-		pthread_mutex_lock(&(philo->base->forks[philo->left]));
-		printf_ext(philo, "has taken a fork", YELLOW);
-		printf_ext(philo, "is eating", GREEN);
-		change_states(philo, EAT);
-
-		philo->death_timer = get_time() + philo->base->to_die;
-		
-		usleep_ext(philo, philo->base->to_eat);
-
-		pthread_mutex_unlock(&(philo->base->forks[philo->left]));
-		pthread_mutex_unlock(&(philo->base->forks[philo->right]));
-		philo->eaten += 1;
+		if (check_fork(philo, philo->right) == 1)
+			pick_fork(philo, philo->right);
+		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+		{
+			unlock_forks(philo);
+			return (1);
+		}
+		if (check_fork(philo, philo->left) == 1)
+			pick_fork(philo, philo->left);
+		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+		{
+			unlock_forks(philo);
+			return (1);
+		}
 	}
 	else
 	{
-		pthread_mutex_lock(&(philo->base->forks[philo->left]));
-		printf_ext(philo, "has taken a fork", YELLOW);
-		
-		pthread_mutex_lock(&(philo->base->forks[philo->right]));
-		printf_ext(philo, "has taken a fork", YELLOW);
-		printf_ext(philo, "is eating", GREEN);
-		change_states(philo, EAT);
-		
-		philo->death_timer = get_time() + philo->base->to_die;
-
-		usleep_ext(philo, philo->base->to_eat);
-
-		pthread_mutex_unlock(&(philo->base->forks[philo->right]));
-		pthread_mutex_unlock(&(philo->base->forks[philo->left]));
-		philo->eaten += 1;
+		if (check_fork(philo, philo->left) == 1)
+			pick_fork(philo, philo->left);
+		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+			return (1);
+		if (check_fork(philo, philo->right) == 1)
+			pick_fork(philo, philo->right);
+		else if (check_fork(philo, philo->left) == 2 || check_fork(philo, philo->left) == 3)
+			return (1);
 	}
+	return (0);
 }
 
-void	ft_sleep(t_philo *philo)
+int	eating(t_philo *philo)
+{
+	change_states(philo, EAT);
+	printf_ext(philo, "is eating", GREEN);
+	philo->death_timer = get_time() + philo->base->to_die;
+	if (usleep_ext(philo, philo->base->to_eat) == 2)
+	{
+		unlock_forks(philo);
+		return (1);
+	}
+	philo->eaten += 1;
+	unlock_forks(philo);
+	return (0);
+}
+
+int	sleeping(t_philo *philo)
 {
 	change_states(philo, SLEEP);
 	printf_ext(philo, "is sleeping", BLUE);
-	usleep_ext(philo, philo->base->to_sleep);
+	if (usleep_ext(philo, philo->base->to_sleep) == 2)
+		return (1);
+	return (0);
 }

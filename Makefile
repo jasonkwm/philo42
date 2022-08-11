@@ -4,7 +4,7 @@ BONUS := bonus
 SRCS_DIR := ./src
 OBJS_DIR := ./obj
 
-SRCS := main.c init.c functions.c ft_atoi.c utils.c main_utils.c
+SRCS := main.c init.c ft_atoi.c utils.c main_utils.c fork.c
 OBJS := ${SRCS:%.c=${OBJS_DIR}/%.o}
 
 CC := gcc -Wall -Werror -Wextra

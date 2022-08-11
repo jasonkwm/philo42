@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/08 17:50:15 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/10 18:25:00 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ typedef struct s_base
 	time_t			to_eat;
 	time_t			to_sleep;
 	int				must_eat;
-	int				shinda;
 	int				*states;
-	int				round;
 	struct s_philo	*philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	state_lock;
 	pthread_mutex_t	base_lock;
 	pthread_mutex_t	print_lock;
 }	t_base;
@@ -59,8 +58,6 @@ typedef struct s_philo
 	int				right;
 	time_t			death_timer;
 	int				eaten;
-	int				status;
-	pthread_mutex_t	philo_lock;
 	t_base			*base;
 }	t_philo;
 
@@ -74,12 +71,18 @@ int		ft_atoi(const char *str);
 
 // utils.c
 time_t	get_time();
-void	usleep_ext(t_philo *philo, time_t time);
+int		usleep_ext(t_philo *philo, time_t time);
 void	printf_ext(t_philo *philo, char *msg, char *color);
+void	print_death(t_philo *philo, char *msg, char *color);
 
 // main_utils.c
 int		check_death(t_philo *philo);
-void	change_states(t_philo *philo, int state);
-void    check_death_tmp(t_philo *philo, int temp);
+int		change_states(t_philo *philo, int state);
+int		count_death(t_philo *philo);
+
+// fork.c
+int		check_fork(t_philo *philo, int fork);
+void	pick_fork(t_philo *philo, int fork);
+void	unlock_forks(t_philo *philo);
 
 #endif

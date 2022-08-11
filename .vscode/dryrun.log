@@ -5,14 +5,14 @@ gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/main.c -o obj
 mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/init.c -o obj/init.o
 mkdir -p ./obj
-gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/functions.c -o obj/functions.o
-mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/ft_atoi.c -o obj/ft_atoi.o
 mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/utils.c -o obj/utils.o
 mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/main_utils.c -o obj/main_utils.o
-gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes ./obj/main.o ./obj/init.o ./obj/functions.o ./obj/ft_atoi.o ./obj/utils.o ./obj/main_utils.o -o philo
+mkdir -p ./obj
+gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/fork.c -o obj/fork.o
+gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes ./obj/main.o ./obj/init.o ./obj/ft_atoi.o ./obj/utils.o ./obj/main_utils.o ./obj/fork.o -o philo
 echo "\033[0;32mPhilo Compiled Successful."
 make: Leaving directory `/Users/jakoh/Desktop/philo'
  

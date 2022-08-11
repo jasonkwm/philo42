@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:28:44 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/08 16:07:51 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/10 13:52:24 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	ft_init_base(char **av, t_base *base)
 	base->to_die = (useconds_t)(ft_atoi(av[2]));
 	base->to_eat = (useconds_t)(ft_atoi(av[3]));
 	base->to_sleep = (useconds_t)(ft_atoi(av[4]));
-	base->shinda = 0;
-	base->round = 0;
 	if (av[5])
 		base->must_eat = ft_atoi(av[5]);
 	base->forks = malloc(sizeof(pthread_mutex_t) * base->nop);
@@ -46,6 +44,7 @@ void	ft_init_base(char **av, t_base *base)
 		base->states[i] = 0;
 		pthread_mutex_init(&(base->forks[i]), NULL);
 	}
+	pthread_mutex_init(&(base->state_lock), NULL);
 	pthread_mutex_init(&(base->base_lock), NULL);
 	pthread_mutex_init(&(base->print_lock), NULL);
 }
@@ -62,7 +61,6 @@ void	ft_init_philos(t_philo **philos, t_base *base)
 		(*philos)[i].left = i;
 		(*philos)[i].right = ((i + 1) % (base->nop));
 		(*philos)[i].base = base;
-		(*philos)[i].status = 0;
-		pthread_mutex_init(&((*philos)->philo_lock), NULL);
+		(*philos)[i].death_timer = 0;
 	}
 }
