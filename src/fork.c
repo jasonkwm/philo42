@@ -6,12 +6,18 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:09:49 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 19:02:31 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:33:19 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// check if fork is available to be picked up
+// this function is called during thinking stage
+// if philo did not picked up both fork before death timer
+// then philo die and return 2
+// if there is a dead philo function returns 3
+// if successful function returns 1
 int	check_fork(t_philo *philo, int fork)
 {
 	time_t	cur;
@@ -19,7 +25,7 @@ int	check_fork(t_philo *philo, int fork)
 	while (1)
 	{
 		cur = get_time();
-		if (check_death(philo))
+		if (count_death(philo))
 			return (3);
 		if (philo->death_timer <= cur)
 		{
@@ -41,12 +47,16 @@ int	check_fork(t_philo *philo, int fork)
 	return (0);
 }
 
+// pick fork function
+// mutex fork & print text to stdout
 void	pick_fork(t_philo *philo, int fork)
 {
 	pthread_mutex_lock(&(philo->base->forks[fork]));
 	printf_ext(philo, "has taken a fork", YELLOW);
 }
 
+// unlocks all forks and change fork status
+// used after philo has finish eating & philo did not die
 void	unlock_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(&(philo->base->forks[philo->left]));
@@ -57,6 +67,8 @@ void	unlock_forks(t_philo *philo)
 	pthread_mutex_unlock(&(philo->base->fork_lock));
 }
 
+// calls check_fork function and if fail to pick up fork
+// unlock_forks function is called and function returns 1
 int	fork_assist(t_philo *philo, int fork_1, int fork_2)
 {
 	if (check_fork(philo, fork_1) != 1)

@@ -6,32 +6,11 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:25:11 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 19:07:50 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:29:21 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// loop through each philo state and check if any is dead
-// if philo dead return 1
-// return 0 if no philo die
-int	check_death(t_philo *philo)
-{
-	int	i;
-
-	pthread_mutex_lock(&(philo->base->state_lock));
-	i = -1;
-	while (++i < philo->base->nop)
-	{
-		if (philo->base->states[i] == DIE)
-		{
-			pthread_mutex_unlock(&(philo->base->state_lock));
-			return (1);
-		}
-	}
-	pthread_mutex_unlock(&(philo->base->state_lock));
-	return (0);
-}
 
 // First the program will check if there is any dead philo
 // if there is a dead philo it will not change state and just return 0
@@ -64,3 +43,25 @@ int	count_death(t_philo *philo)
 	pthread_mutex_unlock(&(philo->base->state_lock));
 	return (c);
 }
+
+// // loop through each philo state and check if any is dead
+// // if philo dead return 1
+// // return 0 if no philo die
+// // replaced with count death since it gives more info
+// // int	check_death(t_philo *philo)
+// {
+// 	int	i;
+
+// 	pthread_mutex_lock(&(philo->base->state_lock));
+// 	i = -1;
+// 	while (++i < philo->base->nop)
+// 	{
+// 		if (philo->base->states[i] == DIE)
+// 		{
+// 			pthread_mutex_unlock(&(philo->base->state_lock));
+// 			return (1);
+// 		}
+// 	}
+// 	pthread_mutex_unlock(&(philo->base->state_lock));
+// 	return (0);
+// }
