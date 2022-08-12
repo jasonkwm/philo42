@@ -6,11 +6,45 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:25:11 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:29:21 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:54:02 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// get and conver time to microseconds
+time_t	get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((time_t)((tv.tv_sec * 1000) + (tv.tv_usec / 1000)));
+}
+
+// help increase accuracy of usleep function
+int	usleep_ext(t_philo *philo, time_t time)
+{
+	time_t	cur;
+	time_t	cmp;
+
+	cmp = get_time() + time;
+	while (1)
+	{
+		cur = get_time();
+		if (cmp - cur <= 0)
+			return (1);
+		if (count_death(philo))
+			return (1);
+		if (philo->death_timer <= cur)
+		{
+			change_states(philo, DIE);
+			print_death(philo, "died", RED);
+			return (2);
+		}
+		usleep(50);
+	}
+	return (0);
+}
 
 // First the program will check if there is any dead philo
 // if there is a dead philo it will not change state and just return 0

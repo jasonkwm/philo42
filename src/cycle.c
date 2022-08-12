@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 12:56:38 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 13:34:47 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:49:09 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	thinking(t_philo *philo)
 		fork_assist(philo, philo->right, philo->left);
 	else
 		fork_assist(philo, philo->left, philo->right);
-	if (check_death(philo))
+	if (count_death(philo))
 		return (1);
 	return (0);
 }
@@ -49,7 +49,7 @@ int	eating(t_philo *philo)
 	change_states(philo, EAT);
 	printf_ext(philo, "is eating", GREEN);
 	philo->death_timer = get_time() + philo->base->to_die;
-	if (usleep_ext(philo, philo->base->to_eat) == 2 || check_death(philo))
+	if (usleep_ext(philo, philo->base->to_eat) == 2 || count_death(philo))
 	{
 		unlock_forks(philo);
 		return (1);
@@ -64,7 +64,7 @@ int	sleeping(t_philo *philo)
 {
 	change_states(philo, SLEEP);
 	printf_ext(philo, "is sleeping", BLUE);
-	if (usleep_ext(philo, philo->base->to_sleep) == 2 || check_death(philo))
+	if (usleep_ext(philo, philo->base->to_sleep) == 2 || count_death(philo))
 		return (1);
 	return (0);
 }

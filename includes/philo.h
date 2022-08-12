@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:27:51 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:53:51 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,19 @@ void	ft_init_philos(t_philo **philos, t_base *base);
 
 // ft_atoi.c
 int		ft_atoi(const char *str);
+int		ft_isnum(char *str);
+int		ft_check_input(int ac, char **av);
 
 // utils.c
-time_t	get_time();
+
 void	destructively_free(t_philo *philo);
-int		usleep_ext(t_philo *philo, time_t time);
+
 void	printf_ext(t_philo *philo, char *msg, char *color);
 void	print_death(t_philo *philo, char *msg, char *color);
 
 // main_utils.c
-// int		check_death(t_philo *philo);
+time_t	get_time();
+int		usleep_ext(t_philo *philo, time_t time);
 int		change_states(t_philo *philo, int state);
 int		count_death(t_philo *philo);
 

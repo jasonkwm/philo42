@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:21 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:25:00 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:57:21 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(int ac, char **av)
 	t_base	base;
 	int		i;
 
-	if (ac < 5 || ac > 6)
-		return (1 | printf("Wrong number of arguments\n"));
+	if (ft_check_input(ac, av))
+		return (1 | printf("Error.\n"));
 	ft_init(av, &philos, &base);
 	i = -1;
 	while (++i < base.nop)
@@ -30,10 +30,11 @@ int	main(int ac, char **av)
 	while (++i < base.nop)
 		pthread_join(philos[i].th, NULL);
 	destructively_free(philos);
-	printf("End.\n");
 	system("leaks philo");
 }
 
+// if must eat is not set then run a infinite while loop
+// else run while loop "must_eat" number of times
 void	*ft_create(void *arg)
 {
 	t_philo	*philo;

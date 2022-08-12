@@ -1,5 +1,15 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/jakoh/Desktop/philo'
-make: Nothing to be done for `all'.
+mkdir -p ./obj
+gcc -Wall -Werror -Wextra  -I includes -c src/init.c -o obj/init.o
+ 
+mkdir -p ./obj
+gcc -Wall -Werror -Wextra  -I includes -c src/funct.c -o obj/funct.o
+mkdir -p ./obj
+gcc -Wall -Werror -Wextra  -I includes -c src/utils.c -o obj/utils.o
+mkdir -p ./obj
+gcc -Wall -Werror -Wextra  -I includes -c src/main_utils.c -o obj/main_utils.o
+gcc -Wall -Werror -Wextra  -I includes ./obj/main.o ./obj/init.o ./obj/funct.o ./obj/utils.o ./obj/main_utils.o ./obj/fork.o ./obj/cycle.o -o philo
+echo "\033[0;32mPhilo Compiled Successful."
 make: Leaving directory `/Users/jakoh/Desktop/philo'
  
