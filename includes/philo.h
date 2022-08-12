@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/11 19:00:20 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:27:51 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ int		ft_atoi(const char *str);
 
 // utils.c
 time_t	get_time();
+void	destructively_free(t_philo *philo);
 int		usleep_ext(t_philo *philo, time_t time);
 void	printf_ext(t_philo *philo, char *msg, char *color);
 void	print_death(t_philo *philo, char *msg, char *color);
 
 // main_utils.c
-int		check_death(t_philo *philo);
+// int		check_death(t_philo *philo);
 int		change_states(t_philo *philo, int state);
 int		count_death(t_philo *philo);
 
@@ -86,4 +87,10 @@ void	unlock_forks(t_philo *philo);
 void	pick_fork(t_philo *philo, int fork);
 int		check_fork(t_philo *philo, int fork);
 int		fork_assist(t_philo *philo, int fork_1, int fork_2);
+
+// cycle.c
+int		if_cycle(t_philo *philo);
+int		thinking(t_philo *philo);
+int		eating(t_philo *philo);
+int		sleeping(t_philo *philo);
 #endif
