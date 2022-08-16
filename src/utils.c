@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 09:51:16 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:52:47 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/16 13:04:16 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 // only print if there is no dead philo
 void	printf_ext(t_philo *philo, char *msg, char *color)
 {
+	pthread_mutex_lock(&(philo->base->print_lock));
 	if (count_death(philo) == 0)
-	{
-		pthread_mutex_lock(&(philo->base->print_lock));
 		printf("%s%ld %i %s%s\n", color, get_time(), philo->name, msg, NC);
-		pthread_mutex_unlock(&(philo->base->print_lock));
-	}
+	pthread_mutex_unlock(&(philo->base->print_lock));
 }
 
 // print only 1 death incase if there is multiple philo dying simultaneously

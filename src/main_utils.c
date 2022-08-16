@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:25:11 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:54:02 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/16 14:12:30 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	usleep_ext(t_philo *philo, time_t time)
 			print_death(philo, "died", RED);
 			return (2);
 		}
-		usleep(50);
+		usleep(100);
 	}
 	return (0);
 }
@@ -77,25 +77,3 @@ int	count_death(t_philo *philo)
 	pthread_mutex_unlock(&(philo->base->state_lock));
 	return (c);
 }
-
-// // loop through each philo state and check if any is dead
-// // if philo dead return 1
-// // return 0 if no philo die
-// // replaced with count death since it gives more info
-// // int	check_death(t_philo *philo)
-// {
-// 	int	i;
-
-// 	pthread_mutex_lock(&(philo->base->state_lock));
-// 	i = -1;
-// 	while (++i < philo->base->nop)
-// 	{
-// 		if (philo->base->states[i] == DIE)
-// 		{
-// 			pthread_mutex_unlock(&(philo->base->state_lock));
-// 			return (1);
-// 		}
-// 	}
-// 	pthread_mutex_unlock(&(philo->base->state_lock));
-// 	return (0);
-// }

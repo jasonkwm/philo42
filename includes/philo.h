@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:34 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:53:51 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/16 13:24:57 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 # define SLEEP 2
 # define DIE 3
 
-struct s_philo;
-
 typedef struct s_base
 {
 	int				nop;
@@ -44,7 +42,6 @@ typedef struct s_base
 	int				must_eat;
 	int				*states;
 	int				*fork_status;
-	struct s_philo	*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	fork_lock;
 	pthread_mutex_t	state_lock;
@@ -53,7 +50,7 @@ typedef struct s_base
 
 typedef struct s_philo
 {
-	pthread_t 		th;
+	pthread_t		th;
 	int				name;
 	int				left;
 	int				right;
@@ -75,12 +72,11 @@ int		ft_check_input(int ac, char **av);
 // utils.c
 
 void	destructively_free(t_philo *philo);
-
 void	printf_ext(t_philo *philo, char *msg, char *color);
 void	print_death(t_philo *philo, char *msg, char *color);
 
 // main_utils.c
-time_t	get_time();
+time_t	get_time(void);
 int		usleep_ext(t_philo *philo, time_t time);
 int		change_states(t_philo *philo, int state);
 int		count_death(t_philo *philo);

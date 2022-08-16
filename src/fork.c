@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 18:09:49 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:33:19 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/16 14:12:16 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_fork(t_philo *philo, int fork)
 			return (1);
 		}
 		pthread_mutex_unlock(&(philo->base->fork_lock));
-		usleep(50);
+		usleep(100);
 	}
 	return (0);
 }

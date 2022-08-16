@@ -6,7 +6,7 @@
 /*   By: jakoh <jakoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:32:21 by jakoh             #+#    #+#             */
-/*   Updated: 2022/08/12 16:57:21 by jakoh            ###   ########.fr       */
+/*   Updated: 2022/08/16 13:20:50 by jakoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int ac, char **av)
 	while (++i < base.nop)
 		pthread_join(philos[i].th, NULL);
 	destructively_free(philos);
-	system("leaks philo");
 }
 
 // if must eat is not set then run a infinite while loop

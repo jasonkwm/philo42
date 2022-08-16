@@ -9,7 +9,7 @@ OBJS := ${SRCS:%.c=${OBJS_DIR}/%.o}
 
 CC := gcc -Wall -Werror -Wextra
 
-FLAGS := #-fsanitize=thread -g #-fsanitize=address -g #-lpthread 
+FLAGS := -fsanitize=thread -g #-fsanitize=address -g #-lpthread 
 
 RED := \033[0;31m
 GREEN := \033[0;32m
