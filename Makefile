@@ -19,6 +19,8 @@ YELLOW := \033[0;33m
 CYAN := \033[0;36m
 NC := \033[0m
 
+# target : prerequisites
+# <TAB> recipe
 all : ${NAME}
 
 # "make -C" run make in specific folder

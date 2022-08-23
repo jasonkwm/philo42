@@ -1,5 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/jakoh/Desktop/philo'
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/jakoh/Desktop/Core/p42'
 mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/main.c -o obj/main.o
 mkdir -p ./obj
@@ -16,5 +16,5 @@ mkdir -p ./obj
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes -c src/cycle.c -o obj/cycle.o
 gcc -Wall -Werror -Wextra -fsanitize=thread -g  -I includes ./obj/main.o ./obj/init.o ./obj/funct.o ./obj/utils.o ./obj/main_utils.o ./obj/fork.o ./obj/cycle.o -o philo
 echo "\033[0;32mPhilo Compiled Successful."
-make: Leaving directory `/Users/jakoh/Desktop/philo'
+make: Leaving directory `/Users/jakoh/Desktop/Core/p42'
  
