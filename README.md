@@ -33,6 +33,8 @@ The only requirements are:
 
 After building the source, run `./philo 4 410 200 200` from the project root. The numeric arguments can be changed and is explained below at [Rules](https://github.com/jasonkwm/philo42/new/master?readme=1#rules) section.
 
+![VN20221108_173951 (1)](https://user-images.githubusercontent.com/32697686/200530917-bbb0a0cf-63c6-4050-a89c-8a2b85b59fe6.gif)
+
 ## Overview
 #### Logic:
 - One or more philosophers sit at a round table. There is a large bowl of spaghetti in the middle of the table.
