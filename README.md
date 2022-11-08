@@ -71,7 +71,7 @@ Any other philosopher number **N** sits between philosopher number **N - 1** and
   - **timestamp_in_ms X** is eating
   - **timestamp_in_ms X** is sleeping
   - **timestamp_in_ms X** is thinking
-  - **timestamp_in_ms X** died \
+  - **timestamp_in_ms X** died
   
 *Replace timestamp_in_ms with the current timestamp in milliseconds
 and X with the philosopher number*
